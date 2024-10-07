@@ -5,9 +5,13 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.AllArgsConstructor;
 
 @Entity
 @Data
+@NoArgsConstructor   // Generates a no-argument constructor
+@AllArgsConstructor  // Generates a constructor with all fields
 public class Admin {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -15,7 +19,4 @@ public class Admin {
 
     private String username;
     private String password;
-
-    // Getters and Setters
 }
-
