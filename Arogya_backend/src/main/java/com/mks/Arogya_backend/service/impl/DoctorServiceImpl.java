@@ -1,4 +1,4 @@
-package com.mks.Arogya_backend.service;
+package com.mks.Arogya_backend.service.impl;
 
 import com.mks.Arogya_backend.model.Doctor;
 import com.mks.Arogya_backend.repo.DoctorRepository;
@@ -10,7 +10,7 @@ import java.io.IOException;
 
 @Service
 @RequiredArgsConstructor
-public class DoctorService {
+public class DoctorServiceImpl {
 
     private final DoctorRepository doctorRepository;
 

@@ -1,35 +1,49 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState } from "react";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import AdminNavbar from "./components/Admin/AdminNavbar";
+import PatientNavbar from "./components/PatientNavbar";
+import AdminDashboard from "./components/Admin/AdminDashboard";
+import DoctorList from "./components/Admin/DoctorList"; // Import DoctorList component
 
-function App() {
-  const [count, setCount] = useState(0)
+const App: React.FC = () => {
+  const userRole = "admin"; // Replace with your logic to get the user's role
+
+  // Dark mode state
+  const [darkMode, setDarkMode] = useState(false);
+
+  // Toggle dark mode function
+  const toggleDarkMode = () => {
+    setDarkMode(!darkMode);
+    document.documentElement.classList.toggle("dark", !darkMode);
+  };
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
+    <Router>
+      <div className={darkMode ? "dark" : ""}>
+        {/* Conditional Navbar based on the user role */}
+        {userRole === "admin" ? (
+          <AdminNavbar darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
+        ) : (
+          <PatientNavbar darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
+        )}
 
-export default App
+        <Routes>
+          <Route path="/" element={<h1>Welcome Home</h1>} />{" "}
+          {/* Add a default route */}
+          <Route
+            path="/admin"
+            element={<AdminDashboard darkMode={darkMode} />}
+          />
+          <Route
+            path="/admin/doctors"
+            element={<DoctorList darkMode={darkMode} />}
+          />
+          {/* Uncomment the following line when the Login component is ready */}
+          {/* <Route path="/login" element={<Login />} /> */}
+        </Routes>
+      </div>
+    </Router>
+  );
+};
+
+export default App;

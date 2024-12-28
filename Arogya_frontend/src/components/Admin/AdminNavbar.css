@@ -1,13 +1,3 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-@layer base {
-    body {
-        @apply bg-gradient-to-tr from-fuchsia-300 to-sky-500 text-gray-900;
-    }
-}
-/* src/index.css */
 .switch {
     position: relative;
     display: inline-block;
